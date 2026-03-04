@@ -117,7 +117,8 @@ GAL.xlsx (limpio, tipado, ordenado)
 ---
 
 ## Author
+**Galo Szlomowicz** · [github.com/GaloSzlomowicz](https://github.com/GaloSzlomowicz)
 
-**unabomber1618** · [github.com/unabomber1618](https://github.com/unabomber1618)
-
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 > *ETL utility for Argentine market data — BYMA/ROFEX CSV exports normalized to clean Excel.*
