@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEM A3 Mercados — Procesador de datos</title>
+    <title>Ordenador de datos CEM A3 — Excel listo para trabajar</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -15,8 +15,26 @@
             color: #e7e9ea;
             min-height: 100vh;
         }
-        h1 { font-size: 1.4rem; margin-bottom: 0.5rem; }
-        .sub { color: #71767b; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        h1 { font-size: 1.5rem; margin-bottom: 0.25rem; font-weight: 600; }
+        .sub { color: #71767b; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4; }
+        .link-cem {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #1d9bf0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .link-cem:hover { text-decoration: underline; }
+        .workflow {
+            background: #1a1f26;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.88rem;
+        }
+        .workflow-title { color: #8b98a5; font-weight: 600; margin-bottom: 0.6rem; }
+        .workflow ol { margin: 0; padding-left: 1.2rem; color: #e7e9ea; line-height: 1.8; }
+        .workflow li strong { color: #1d9bf0; }
         .dropzone {
             border: 2px dashed #38444d;
             border-radius: 12px;
@@ -29,6 +47,7 @@
         .dropzone input { display: none; }
         .dropzone p { margin: 0; color: #71767b; }
         .dropzone strong { color: #1d9bf0; }
+        .dropzone .hint { font-size: 0.8rem; margin-top: 0.3rem; color: #536471; }
         button {
             margin-top: 1rem;
             padding: 0.75rem 1.5rem;
@@ -37,6 +56,7 @@
             border: none;
             border-radius: 8px;
             font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
             width: 100%;
         }
@@ -44,30 +64,41 @@
         button:disabled { opacity: 0.5; cursor: not-allowed; }
         .info {
             margin-top: 1.5rem;
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             background: #1a1f26;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            border-radius: 10px;
+            font-size: 0.82rem;
             color: #8b98a5;
         }
-        .info ul { margin: 0.5rem 0 0 1rem; padding: 0; }
+        .info-title { font-weight: 600; color: #e7e9ea; margin-bottom: 0.4rem; }
+        .info ul { margin: 0.3rem 0 0 1rem; padding: 0; line-height: 1.6; }
     </style>
 </head>
 <body>
-    <h1>CEM A3 Mercados</h1>
-    <p class="sub">Subí el Excel o CSV que descargaste. Lo ordenamos y te lo devolvemos listo para trabajar.</p>
+    <h1>Ordenador de datos CEM A3</h1>
+    <p class="sub">Excel y CSV de exportación argentina → ordenados, normalizados y listos para análisis.</p>
+    <a class="link-cem" href="https://cem.matbarofex.com.ar/" target="_blank" rel="noopener">→ Ir a CEM A3 Mercados para descargar datos</a>
+
+    <div class="workflow">
+        <div class="workflow-title">Pasos:</div>
+        <ol>
+            <li><strong>Descargá</strong> tu archivo desde CEM (Excel o CSV con ;)</li>
+            <li><strong>Subí</strong> el archivo acá abajo</li>
+            <li><strong>Descargá</strong> el Excel procesado listo para trabajar</li>
+        </ol>
+    </div>
 
     <form id="form" action="/procesar" method="post" enctype="multipart/form-data">
         <label class="dropzone" id="dropzone">
             <input type="file" name="archivo" id="archivo" accept=".csv,.xlsx,.xls" required>
             <p><strong>Arrastrá o hacé clic</strong> para seleccionar</p>
-            <p>CSV (;) o Excel (.xlsx, .xls)</p>
+            <p class="hint">CSV (;) · Excel (.xlsx, .xls)</p>
         </label>
         <button type="submit" id="btn">Procesar y descargar</button>
     </form>
 
     <div class="info">
-        <strong>Qué hace:</strong>
+        <div class="info-title">Transformaciones que aplica:</div>
         <ul>
             <li>Parsea fechas (dd-mm-aaaa) y ordena cronológicamente</li>
             <li>Normaliza números argentinos (coma decimal, punto miles)</li>
