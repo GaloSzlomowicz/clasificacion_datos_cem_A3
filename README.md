@@ -1,6 +1,7 @@
 # 🗂️ Market Data ETL — CEM A3 Mercados
 
-> Pipeline ETL para datos de mercado argentinos (ROFEX/BYMA). Incluye web app para subir Excel/CSV y descargar el archivo procesado.
+> Pipeline ETL para datos de mercado argentinos (ROFEX/BYMA). Incluye web app para subir Excel/CSV y descargar el archivo procesado.  
+> Impulsado por [HedgeAR](https://hedgear.com/).
 
 ---
 
@@ -83,7 +84,7 @@ Output: `GAL.xlsx` (limpio, tipado, ordenado por fecha)
 
 ---
 
-**Autor:** [Galo Szlomowicz](https://github.com/GaloSzlomowicz) · [Repo](https://github.com/GaloSzlomowicz/clasificacion_datos_cem_A3)
+**Autor:** [Galo Szlomowicz](https://github.com/GaloSzlomowicz) · Impulsado por [HedgeAR](https://hedgear.com/) · [Repo](https://github.com/GaloSzlomowicz/clasificacion_datos_cem_A3)
 
 ## License
 This project is licensed under the MIT License.

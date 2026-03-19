@@ -16,6 +16,9 @@
             min-height: 100vh;
         }
         h1 { font-size: 1.5rem; margin-bottom: 0.25rem; font-weight: 600; }
+        .hedgear { font-size: 0.85rem; color: #1d9bf0; margin-bottom: 0.5rem; }
+        .hedgear a { color: #1d9bf0; text-decoration: none; font-weight: 500; }
+        .hedgear a:hover { text-decoration: underline; }
         .sub { color: #71767b; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4; }
         .link-cem {
             display: inline-block;
@@ -35,21 +38,25 @@
         .workflow-title { color: #8b98a5; font-weight: 600; margin-bottom: 0.6rem; }
         .workflow ol { margin: 0; padding-left: 1.2rem; color: #e7e9ea; line-height: 1.8; }
         .workflow li strong { color: #1d9bf0; }
-        .dropzone {
+        .upload-area {
             border: 2px dashed #38444d;
             border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
+            padding: 1rem;
             transition: border-color 0.2s, background 0.2s;
         }
-        .dropzone:hover, .dropzone.dragover { border-color: #1d9bf0; background: rgba(29,155,240,0.06); }
+        .upload-area:hover, .upload-area.dragover { border-color: #1d9bf0; background: rgba(29,155,240,0.06); }
+        .dropzone {
+            cursor: pointer;
+            display: block;
+            padding: 1rem 0 0;
+        }
         .dropzone input { display: none; }
         .dropzone p { margin: 0; color: #71767b; }
         .dropzone strong { color: #1d9bf0; }
         .dropzone .hint { font-size: 0.8rem; margin-top: 0.3rem; color: #536471; }
         button {
             margin-top: 1rem;
+            display: block;
             padding: 0.75rem 1.5rem;
             background: #1d9bf0;
             color: #fff;
@@ -72,6 +79,9 @@
         }
         .info-title { font-weight: 600; color: #e7e9ea; margin-bottom: 0.4rem; }
         .info ul { margin: 0.3rem 0 0 1rem; padding: 0; line-height: 1.6; }
+        .footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: #536471; }
+        .footer a { color: #1d9bf0; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
 
         .flow-map {
             display: flex;
@@ -144,7 +154,7 @@
         .file-display {
             min-height: 2.5rem;
             padding: 0.6rem 1rem;
-            background: #1a1f26;
+            background: rgba(0,0,0,0.2);
             border-radius: 8px;
             margin-bottom: 1rem;
             font-size: 0.88rem;
@@ -161,6 +171,7 @@
 </head>
 <body>
     <h1>Ordenador de datos CEM A3</h1>
+    <p class="hedgear">Impulsado por <a href="https://hedgear.com/" target="_blank" rel="noopener">HedgeAR</a></p>
     <p class="sub">Excel y CSV de exportación argentina → ordenados, normalizados y listos para análisis.</p>
     <a class="link-cem" href="https://cem.matbarofex.com.ar/" target="_blank" rel="noopener">→ Ir a CEM A3 Mercados para descargar datos</a>
 
@@ -180,15 +191,17 @@
     </div>
 
     <form id="form" action="/procesar" method="post" enctype="multipart/form-data">
-        <div class="file-display empty" id="fileDisplay">
-            <span class="icon">📁</span>
-            <span class="text">Ningún archivo seleccionado</span>
+        <div class="upload-area" id="uploadArea">
+            <div class="file-display empty" id="fileDisplay">
+                <span class="icon">📁</span>
+                <span class="text">Ningún archivo seleccionado</span>
+            </div>
+            <label class="dropzone" id="dropzone">
+                <input type="file" name="archivo" id="archivo" accept=".csv,.xlsx,.xls" required>
+                <p><strong>Arrastrá o hacé clic</strong> para seleccionar</p>
+                <p class="hint">CSV (;) · Excel (.xlsx, .xls)</p>
+            </label>
         </div>
-        <label class="dropzone" id="dropzone">
-            <input type="file" name="archivo" id="archivo" accept=".csv,.xlsx,.xls" required>
-            <p><strong>Arrastrá o hacé clic</strong> para seleccionar</p>
-            <p class="hint">CSV (;) · Excel (.xlsx, .xls)</p>
-        </label>
         <button type="submit" id="btn">Procesar y descargar</button>
     </form>
 
@@ -201,6 +214,8 @@
             <li>Devuelve Excel listo para análisis</li>
         </ul>
     </div>
+
+    <footer class="footer">Impulsado por <a href="https://hedgear.com/" target="_blank" rel="noopener">HedgeAR</a></footer>
 
     <script>
         const dropzone = document.getElementById("dropzone");
@@ -247,12 +262,15 @@
             });
         }
 
+        const uploadArea = document.getElementById("uploadArea");
         dropzone.addEventListener("click", () => input.click());
-        dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("dragover"); });
-        dropzone.addEventListener("dragleave", () => dropzone.classList.remove("dragover"));
-        dropzone.addEventListener("drop", (e) => {
+        dropzone.addEventListener("dragover", (e) => { e.preventDefault(); uploadArea.classList.add("dragover"); });
+        dropzone.addEventListener("dragleave", (e) => { if (!uploadArea.contains(e.relatedTarget)) uploadArea.classList.remove("dragover"); });
+        uploadArea.addEventListener("dragover", (e) => { e.preventDefault(); uploadArea.classList.add("dragover"); });
+        uploadArea.addEventListener("dragleave", (e) => { if (!uploadArea.contains(e.relatedTarget)) uploadArea.classList.remove("dragover"); });
+        uploadArea.addEventListener("drop", (e) => {
             e.preventDefault();
-            dropzone.classList.remove("dragover");
+            uploadArea.classList.remove("dragover");
             if (e.dataTransfer.files.length) {
                 input.files = e.dataTransfer.files;
                 input.dispatchEvent(new Event("change"));
