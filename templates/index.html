@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEM A3 Mercados — Procesador de datos</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            max-width: 540px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: #0f1419;
+            color: #e7e9ea;
+            min-height: 100vh;
+        }
+        h1 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .sub { color: #71767b; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .dropzone {
+            border: 2px dashed #38444d;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .dropzone:hover, .dropzone.dragover { border-color: #1d9bf0; background: rgba(29,155,240,0.06); }
+        .dropzone input { display: none; }
+        .dropzone p { margin: 0; color: #71767b; }
+        .dropzone strong { color: #1d9bf0; }
+        button {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: #1d9bf0;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover { background: #1a8cd8; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #1a1f26;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #8b98a5;
+        }
+        .info ul { margin: 0.5rem 0 0 1rem; padding: 0; }
+    </style>
+</head>
+<body>
+    <h1>CEM A3 Mercados</h1>
+    <p class="sub">Subí el Excel o CSV que descargaste. Lo ordenamos y te lo devolvemos listo para trabajar.</p>
+
+    <form id="form" action="/procesar" method="post" enctype="multipart/form-data">
+        <label class="dropzone" id="dropzone">
+            <input type="file" name="archivo" id="archivo" accept=".csv,.xlsx,.xls" required>
+            <p><strong>Arrastrá o hacé clic</strong> para seleccionar</p>
+            <p>CSV (;) o Excel (.xlsx, .xls)</p>
+        </label>
+        <button type="submit" id="btn">Procesar y descargar</button>
+    </form>
+
+    <div class="info">
+        <strong>Qué hace:</strong>
+        <ul>
+            <li>Parsea fechas (dd-mm-aaaa) y ordena cronológicamente</li>
+            <li>Normaliza números argentinos (coma decimal, punto miles)</li>
+            <li>Quita símbolos % y convierte a float</li>
+            <li>Devuelve Excel listo para análisis</li>
+        </ul>
+    </div>
+
+    <script>
+        const dropzone = document.getElementById("dropzone");
+        const input = document.getElementById("archivo");
+        const form = document.getElementById("form");
+        const btn = document.getElementById("btn");
+
+        dropzone.addEventListener("click", () => input.click());
+        dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("dragover"); });
+        dropzone.addEventListener("dragleave", () => dropzone.classList.remove("dragover"));
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropzone.classList.remove("dragover");
+            if (e.dataTransfer.files.length) input.files = e.dataTransfer.files;
+        });
+
+        form.addEventListener("submit", () => { btn.disabled = true; btn.textContent = "Procesando…"; });
+    </script>
+</body>
+</html>
