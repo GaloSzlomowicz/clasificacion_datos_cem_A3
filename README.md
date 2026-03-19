@@ -4,6 +4,36 @@
 
 ---
 
+## Uso de la herramienta
+
+**Origen de datos:** [CEM Matba Rofex](https://cem.matbarofex.com.ar/) — Centro Estadísticas de Mercado donde filtrás producto, rango de fechas y descargás CSV (Futuros u Opciones).
+
+**Flujo:**
+
+1. **Descargar** — En CEM elegís producto (ej. SOJ Dolar), posición, rango de fechas, y usás "Descargar CSV (Futuros)" o "Descargar CSV (Opciones)". El archivo viene con `;` como separador y formato argentino (coma decimal, punto miles, %).
+
+2. **Subir** — Entrás a la [herramienta en Railway](https://clasificadora3cem.up.railway.app) (o localhost si corrés local) y subís el Excel o CSV descargado.
+
+3. **Descargar** — La herramienta procesa y devuelve un Excel (nombre original + `_procesado.xlsx`) ordenado por fecha, con números normalizados y listo para análisis.
+
+<p align="center">
+  <img src="docs/herramienta-subir.png" alt="Herramienta - listo para subir" width="400">
+</p>
+
+<p align="center">
+  <em>Interfaz de la herramienta — seleccionar archivo y procesar</em>
+</p>
+
+<p align="center">
+  <img src="docs/herramienta-procesando.png" alt="Herramienta - procesando" width="400">
+</p>
+
+<p align="center">
+  <em>Estado durante el procesamiento</em>
+</p>
+
+---
+
 ## Web app (Railway)
 
 ### Qué hace
