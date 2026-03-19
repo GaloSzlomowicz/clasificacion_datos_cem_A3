@@ -54,3 +54,6 @@ Output: `GAL.xlsx` (limpio, tipado, ordenado por fecha)
 ---
 
 **Autor:** [Galo Szlomowicz](https://github.com/GaloSzlomowicz) · [Repo](https://github.com/GaloSzlomowicz/clasificacion_datos_cem_A3)
+
+## License
+This project is licensed under the MIT License.
