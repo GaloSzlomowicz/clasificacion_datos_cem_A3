@@ -16,8 +16,8 @@
             min-height: 100vh;
         }
         h1 { font-size: 1.5rem; margin-bottom: 0.25rem; font-weight: 600; }
-        .hedgear { font-size: 0.85rem; color: #1d9bf0; margin-bottom: 0.5rem; }
-        .hedgear a { color: #1d9bf0; text-decoration: none; font-weight: 500; }
+        .hedgear { font-size: 0.85rem; color: #1d9bf0; margin-bottom: 0.5rem; position: relative; z-index: 10; }
+        .hedgear a { color: #1d9bf0; text-decoration: none; font-weight: 500; cursor: pointer; }
         .hedgear a:hover { text-decoration: underline; }
         .sub { color: #71767b; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4; }
         .link-cem {
@@ -79,8 +79,8 @@
         }
         .info-title { font-weight: 600; color: #e7e9ea; margin-bottom: 0.4rem; }
         .info ul { margin: 0.3rem 0 0 1rem; padding: 0; line-height: 1.6; }
-        .footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: #536471; }
-        .footer a { color: #1d9bf0; text-decoration: none; }
+        .footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: #536471; position: relative; z-index: 10; }
+        .footer a { color: #1d9bf0; text-decoration: none; cursor: pointer; }
         .footer a:hover { text-decoration: underline; }
 
         .flow-map {
@@ -171,7 +171,7 @@
 </head>
 <body>
     <h1>Ordenador de datos CEM A3</h1>
-    <p class="hedgear">Impulsado por <a href="https://hedgear.com/" target="_blank" rel="noopener">HedgeAR</a></p>
+    <p class="hedgear">Impulsado por <a href="https://hedgear.up.railway.app/" target="_self" rel="noopener noreferrer">HedgeAR</a></p>
     <p class="sub">Excel y CSV de exportación argentina → ordenados, normalizados y listos para análisis.</p>
     <a class="link-cem" href="https://cem.matbarofex.com.ar/" target="_blank" rel="noopener">→ Ir a CEM A3 Mercados para descargar datos</a>
 
@@ -215,7 +215,7 @@
         </ul>
     </div>
 
-    <footer class="footer">Impulsado por <a href="https://hedgear.com/" target="_blank" rel="noopener">HedgeAR</a></footer>
+    <footer class="footer">Impulsado por <a href="https://hedgear.up.railway.app/" target="_self" rel="noopener noreferrer">HedgeAR</a></footer>
 
     <script>
         const dropzone = document.getElementById("dropzone");
